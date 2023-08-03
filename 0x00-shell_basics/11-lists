@@ -1,2 +1,2 @@
 #!/bin/bash
- ls -la /boot "$(pwd)"  "$(pwd)/.." 
+echo -e "Files in the current directory:\n$(ls -la "$(pwd)")\n\nFiles in the parent directory:\n$(ls -la "$(pwd)/..")\n\nFiles in the /boot directory:\n$(ls -la /boot)"

@@ -1,2 +1,2 @@
 #!/bin/bash
-filetype=$(file -b -L /tmp/iamafile)
+type /tmp/iamafile
