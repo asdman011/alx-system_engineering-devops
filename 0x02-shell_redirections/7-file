@@ -1,2 +1,2 @@
 #!/bin/bash
-echo -e "Best School\n"  > "\*\\\'\"Best School\"\'\\\*$\?\*\*\*\*\*:)"#two backslashes need a third one to make the two visible
+echo 'Best School'> \\\*\\\\\'\"Best\ School\"\\\'\\\\\*\$\\\?\\\*\\\*\\\*\\\*\\\*\:\)#two backslashes need a third one to make the two visible
