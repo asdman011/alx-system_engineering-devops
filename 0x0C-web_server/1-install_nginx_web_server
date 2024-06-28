@@ -1,11 +1,37 @@
 #!/usr/bin/env bash
 # Install nginx on your web-01 server
 # Nginx should be listening on port 80
-# When querying Nginx at its root / with a GET request (requesting a page) 
-# using curl, it must return a page that contains the string Holberton School
+# When querying Nginx at its root / with a GET request (requesting a page)
+# using curl, it must return a page that contains the string Hello World!
+# This script will be run on the server itself
 
+# Update package list and install Nginx
 apt-get -y update
 apt-get -y install nginx
+
+# Allow HTTP traffic through the firewall
 ufw allow 'Nginx HTTP'
+
+# Create the HTML file with the required content
 echo 'Hello World!' > /var/www/html/index.html
+
+# Start Nginx without using systemctl
 service nginx start
+
+# Ensure Nginx is listening on port 80
+if ! grep -q 'listen 80;' /etc/nginx/sites-available/default; then
+    sed -i 's/listen 80 default_server;/listen 80;/' /etc/nginx/sites-available/default
+    sed -i 's/listen \[::\]:80 default_server;/listen \[::\]:80;/' /etc/nginx/sites-available/default
+fi
+
+# Reload Nginx to apply the changes
+nginx -s reload
+
+# Check if Nginx is running
+if ! service nginx status; then
+    echo "Nginx is not running. Attempting to start..."
+    service nginx start
+fi
+
+# Print the IP address to verify accessibility
+ip addr show
